@@ -72,47 +72,27 @@ export const login = createAsyncThunk(
 
         // Taking and validation date befor fetching to API 
         const loginData = getState().auth.login
-        if (loginData.username == "" || loginData.password == "") {
-            return dispatch(setMessage({
-                activityName: "login",
-                message: "Не оставляйте поля пустым.",
-                color: "warning",
-            }))
 
+        console.log(loginData.username, loginData.password);
+
+        if (loginData.username.length < 1 || loginData.password.length < 1) {
+            return rejectWithValue("Не оставляйте поля пустым.")
         } else if (loginData.username.length < 3 || loginData.password.length < 6) {
-            return dispatch(setMessage({
-                activityName: "login",
-                message: "Логин не меньше 3 символов, пароль - не меньше 6.",
-                color: "warning",
-            }))
-
+            return rejectWithValue("Логин не меньше 3 символов, пароль - не меньше 6.")
         } else if (loginData.username.length > 25 || loginData.password.length > 25) {
-            return dispatch(setMessage({
-                activityName: "login",
-                message: "Логин и пароль не длиннее 30 символов каждый",
-                color: "warning",
-            }))
+            return rejectWithValue("Логин и пароль не длиннее 30 символов каждый")
         }
 
         // FETCHING //
         return await $api.post("/auth/login", loginData) //$api - imported with settings 
             .then((res) => {
+                const userData = res.data.user
                 dispatch(setCurrentUser(res.data.user));
                 localStorage.setItem("accessToken", res.data.accessToken);
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: "Вход выполнен",
-                    color: "main",
-                }))
-                return res.data.user
+                return userData
             })
             .catch((err) => {
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: err.response.data.message,
-                    color: "warning",
-                }))
-                throw rejectWithValue(err.payload)
+                throw rejectWithValue(err.response.data.message)
             })
     },
 
@@ -127,54 +107,27 @@ export const register = createAsyncThunk(
         const registerData = getState().auth.register
 
         // Taking and validation date befor fetching to API 
-        if (registerData.username == "" || registerData.password == "") {
-            return dispatch(setMessage({
-                activityName: "register",
-                message: "Не оставляйте поля пустым.",
-                color: "warning",
-            }))
-
+        if (registerData.username.length < 0 || registerData.password.length < 0) {
+            return rejectWithValue("Не оставляйте поля пустым.")
         } else if (registerData.username.length < 3 || registerData.password.length < 6) {
-            return dispatch(setMessage({
-                activityName: "register",
-                message: "Логин не меньше 3 символов, пароль - не меньше 6.",
-                color: "warning",
-            }))
-
+            return rejectWithValue("Логин не меньше 3 символов, пароль - не меньше 6.")
         } else if (registerData.username.length > 25 || registerData.password.length > 25) {
-            return dispatch(setMessage({
-                activityName: "register",
-                message: "Логин и пароль не длиннее 30 символов каждый",
-                color: "warning",
-            }))
+            return rejectWithValue("Логин и пароль не длиннее 30 символов каждый.")
         } else if (registerData.password != registerData.passwordVerification) {
-            return dispatch(setMessage({
-                activityName: "register",
-                message: "Пароль должен совпадать с его подтверждением",
-                color: "warning",
-            }))
+            return rejectWithValue("Пароль должен совпадать с его подтверждением.")
         }
 
         // FETCHING //
         return $api.post("/auth/register", registerData) //$api - imported with settings 
             .then((res) => {
-                if (res.data.accessToken) {
-                    localStorage.setItem("accessToken", res.data.accessToken);
+                const { userData, accessToken } = res.data
+                if (accessToken) {
+                    localStorage.setItem("accessToken", accessToken);
                 }
-                dispatch(setMessage({
-                    activityName: "register",
-                    message: "Регистрация выполнена",
-                    color: "main",
-                }))
-                return res.data.user
+                return userData
             })
             .catch((err) => {
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: err.response.data.message,
-                    color: "warning",
-                }))
-                throw rejectWithValue(err.payload)
+                throw rejectWithValue(err.response.data.message)
             })
     },
 
@@ -188,12 +141,8 @@ const authSlice = createSlice({
         error: null,
         // currentActivity: "login", // This state decides current activity: registration or logging in.
         login: {
-            username: '',
-            password: '',
-            message: {
-                text: "Введите данные пользователя",
-                color: "text",
-            },
+            username: "",
+            password: "",
         },
         register: {
             username: '',
@@ -201,24 +150,21 @@ const authSlice = createSlice({
             passwordVerification: '',
             firstName: '',
             familyName: '',
-            message: {
-                text: "Введите данные для регистрации",
-                color: "text",
-            },
         },
         currentUser: null
     },
 
     reducers: {
+        setStatusAndError(state, action) {
+            const { error, status } = action.payload
+            state.error = error
+            state.status = status
+        },
         changeInput(state, action) {
             state[`${action.payload.activityName}`][`${action.payload.inputName}`] = action.payload.inputData
         },
         setShouldFetch(state, action) {
             state.shouldFetch = action.payload
-        },
-        setMessage(state, action) {
-            state[`${action.payload.activityName}`].message.text = action.payload.message
-            state[`${action.payload.activityName}`].message.color = action.payload.color
         },
         setCurrentUser(state, action) {
             state.currentUser = action.payload
@@ -234,6 +180,7 @@ const authSlice = createSlice({
             state.status = "loading";
             state.error = null
         },
+
         [login.fulfilled]: (state, action) => {
             state.status = "resolved";
             state.currentUser = action.payload
@@ -287,6 +234,7 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 export const {
+    setStatusAndError,
     changeInput,
     setShouldFetch,
     setMessage,

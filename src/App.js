@@ -15,7 +15,7 @@ import Auth from "./components/Auth/Auth";
 import { Outlet, createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Profile from './components/Profile/Profile';
 import { useEffect } from 'react';
-import { checkAuth } from './redux/authSlice';
+import { checkAuth, setStatusAndError } from './redux/authSlice';
 import { setPathnameUserId } from './redux/profileSlice';
 import { clearPosts, setFolder, setPosts, setSection } from './redux/feedSlice';
 
@@ -34,30 +34,12 @@ function App() {
     }
   }, [])
 
-  const Layout = () => {
-    return (
-      <div className={"app-wrapper "}>
-        <Header />
-        <div className='content-wrapper'>
-          <Outlet />
-          <SideMenu />
-        </div>
-      </div>
-    )
-  }
 
-  const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
-      return <Navigate to="/login" />
-    }
-    return children;
-  }
+  // REACT ROUTER loaders
 
-  const ProtectedRouteLogin = ({ children }) => {
-    if (currentUser) {
-      return <Navigate to="/feed/fresh" />
-    }
-    return children;
+  const authLoader = () => {
+    dispatch(setStatusAndError({status: "", error: ""}))
+    return null
   }
 
   const feedLaoder = ({ params }) => {
@@ -83,6 +65,36 @@ function App() {
       document.dispatchEvent(new Event("usersIsOpened"))
     }, 0);
     return null
+  }
+
+   // REACT ROUTER creating ProtectedRoutes
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />
+    }
+    return children;
+  }
+
+  const ProtectedRouteLogin = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to="/feed/fresh" />
+    }
+    return children;
+  }
+
+  // REACT ROUTER creating BrowserRouter
+
+  const Layout = () => {
+    return (
+      <div className={"app-wrapper "}>
+        <Header />
+        <div className='content-wrapper'>
+          <Outlet />
+          <SideMenu />
+        </div>
+      </div>
+    )
   }
 
   const router = createBrowserRouter([
@@ -125,9 +137,7 @@ function App() {
     },
     {
       path: '/register',
-      // loader: () => {
-      //   dispatch(changeCurrentActivity("register"))
-      // },
+      loader: authLoader,
       element:
         <ProtectedRouteLogin>
           <Auth />
@@ -135,9 +145,7 @@ function App() {
     },
     {
       path: "/login",
-      // loader: () => {
-      //   dispatch(changeCurrentActivity("login"))
-      // },
+      loader: authLoader,
       element:
         <ProtectedRouteLogin>
           <Auth />

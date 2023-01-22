@@ -66,7 +66,7 @@ const Header = () => {
                         <input
                             className={s.searchInput}
                             value={searchString}
-                            maxlength="20"
+                            maxLength="20"
                             onChange={handleChangeSearchString}
                             type="text"
                             placeholder="Введите название поста" />

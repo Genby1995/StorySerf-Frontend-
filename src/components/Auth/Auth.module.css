@@ -105,7 +105,8 @@ h1 {
     align-items: center;
 }
 .warning {
-    color: var(--color-text-warn)
+    color: red;
+    /* color: var(--color-text-warn) */
 }
 
 .inputText {

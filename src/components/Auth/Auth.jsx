@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeInput, changeCurrentActivity, login as login_AC, register as register_AC } from "../../redux/authSlice";
 
 const Auth = (props) => {
-    /* REDUX */
+
+    // REDUX
     const dispatch = useDispatch();
     const register = useSelector((state) => state.auth.register)
     const login = useSelector((state) => state.auth.login)
     const loadingStatus = useSelector((state) => state.auth.status)
+    const errorMessage = useSelector((state) => state.auth.error)
     const currentActivity = window.location.pathname.slice(1)
+
+    // HANDLERS
     const handleChange = (e) => {
         dispatch(changeInput({
             inputName: e.target.name,
@@ -26,7 +30,8 @@ const Auth = (props) => {
         e.preventDefault();
         dispatch(login_AC());
     }
-    /* REDUX */
+    
+    // RENDER
 
     return (
         <div className={s.background}>
@@ -43,18 +48,21 @@ const Auth = (props) => {
                     {loadingStatus == "loading"
 
                         ? <form
-                            className={s.form}
-                            onSubmit={handleSubmitLogin}>
+                            className={s.form}>
                             <h1>Загрузка...</h1>
                         </form>
 
                         :
                         <form className={s.form} onSubmit={handleSubmitRegister}>
                             <h1>Регистрация</h1>
-                            <div className={register.message.color == "warning"
-                                ? s.message + " " + s.warning
-                                : s.message}>
-                                {register.message.text}</div>
+                            {loadingStatus == "error"
+                                ? <div className={s.message + " " + s.warning}>  {errorMessage} </div>
+                                : <div className={s.message}>
+                                    {loadingStatus == "resolved"
+                                        ? "Регистрация выполнена" 
+                                        : "Введите данные для регистрации"}
+                                </div>
+                            }
                             <input
                                 name="username"
                                 type='text'
@@ -110,9 +118,7 @@ const Auth = (props) => {
                 }>
                     {loadingStatus == "loading"
 
-                        ? <form
-                            className={s.form}
-                            onSubmit={handleSubmitLogin}>
+                        ? <form className={s.form}>
                             <h1>Загрузка...</h1>
                         </form>
 
@@ -120,12 +126,14 @@ const Auth = (props) => {
                             className={s.form}
                             onSubmit={handleSubmitLogin}>
                             <h1>Авторизация</h1>
-                            <div
-                                className={login.message.color == "warning"
-                                    ? s.message + " " + s.warning
-                                    : s.message}>
-                                {login.message.text}
-                            </div>
+                            {loadingStatus == "error"
+                                ? <div className={s.message + " " + s.warning}>  {errorMessage} </div>
+                                : <div className={s.message}>
+                                    {loadingStatus == "resolved"
+                                        ? "Вход выполнен"
+                                        : "Введите данные пользователя"}
+                                </div>
+                            }
                             <input
                                 name="username"
                                 type='text'

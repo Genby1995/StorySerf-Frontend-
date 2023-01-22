@@ -8,7 +8,7 @@ import usersSlice from "./usersSlice";
 import darkmodeSlice from "./darkmodeSlice";
 import searchStringSlice from "./searchStringSlice";
 
-let rootReducer = combineReducers ({
+let rootReducer = combineReducers({
     auth: authSlice,
     darkmode: darkmodeSlice,
     messenger: messengerReducer,
