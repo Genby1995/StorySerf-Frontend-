@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const API_URL = "http://localhost:8800/api"
-// export const API_URL = "https://storysurf-api.onrender.com/api"
+// export const API_URL = "http://localhost:8800/api"
+export const API_URL = "https://storysurf-api.onrender.com/api"
 
 const $api = axios.create({
     withCredentials: true,

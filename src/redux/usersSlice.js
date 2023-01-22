@@ -36,7 +36,6 @@ export const fetchUsers = createAsyncThunk(
                     throw rejectWithValue("No Content")
                 };
                 const { message, usersData } = res.data
-                console.log(usersData);
                 return { message: message, usersData: usersData }
             })
             .catch((err) => {
@@ -109,7 +108,6 @@ const usersSlice = createSlice({
         },
         [toggleFollowUser.fulfilled]: (state, action) => {
             const { targetFollowers, userIndex } = action.payload
-            console.log(targetFollowers, userIndex);
             state.status = "resolved";
             state.usersData[userIndex].followers = targetFollowers;
             state.error = null
