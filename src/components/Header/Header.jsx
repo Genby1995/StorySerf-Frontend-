@@ -3,7 +3,7 @@ import { useSelector, useDispatch} from "react-redux"
 import { actionNames, initialState } from "../../redux/darkmodeReducer";
 
 import s from "./Header.module.css";
-import { Search, Notifications, Brightness3, Brightness7 } from "@material-ui/icons";
+import { Search, Notifications, Brightness3, Brightness7 } from '@mui/icons-material/';
 import { Link, NavLink as BaseNavLink } from "react-router-dom";
 import { toggleDarkmode } from "../../redux/darkmodeSlice";
 import { changeSearchString as changeSearchString_AC } from "../../redux/searchStringSlice";

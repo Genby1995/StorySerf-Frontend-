@@ -2,7 +2,7 @@ import React from "react";
 import s from "./SideMenu.module.css";
 
 import { logout as logout_AC } from "../../redux/authSlice"
-import { ExitToApp, Person, Forum, Bookmark, People } from '@material-ui/icons/';
+import { ExitToApp, Person, Forum, Bookmark, People } from '@mui/icons-material/';
 import { Link, NavLink as BaseNavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 

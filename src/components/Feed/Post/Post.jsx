@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import s from "./Post.module.css";
-import { Comment, DeleteForever, HourglassEmpty } from '@material-ui/icons/';
+import { Comment, DeleteForever, HourglassEmpty } from '@mui/icons-material/';
 import {
     togglePostVisability as togglePostVisability_AC,
     fetchLikeDislike as fetchLikeDislike_AC,

@@ -13,10 +13,10 @@ import {
     DeleteForever,
     Delete,
     HourglassEmpty,
-} from "@material-ui/icons";
+    NotificationAdd,
+    NotificationsOff,
+} from '@mui/icons-material/';
 
-import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
-import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../../redux/feedSlice";
 import {
@@ -49,7 +49,7 @@ const Profile = (params) => {
         if (shouldFetch.current) {
             shouldFetch = false;
             getUser();
-            getPosts();
+            // getPosts();
         }
     }, [pathnameUserId])
 
@@ -100,7 +100,7 @@ const Profile = (params) => {
     }
 
     const handleDeleteAccount = (e) => {
-        if (window.confirm("Вы уверены, что хотите удалить этот пост?")) {
+        if (window.confirm("Вы уверены, что хотите удалить этот аккаунт?")) {
             dispatch(deleteAccount_AC({
                 userId: pathnameUserId,
             }))
@@ -204,7 +204,7 @@ const Profile = (params) => {
                     name="edit"
                     className={s.actionButton}
                     onClick={handleToggleSubscription}>
-                    {isFollowed ? <NotificationsOffIcon /> : <NotificationAddIcon />}
+                    {isFollowed ? <NotificationsOff /> : <NotificationAdd />}
                     {isFollowed ? "Отписаться" : "Подписаться"}
                 </button>
             </div>

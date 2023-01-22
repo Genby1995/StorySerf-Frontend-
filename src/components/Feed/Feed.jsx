@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { fetchPosts, setPosts } from "../../redux/feedSlice"
 
-import { HourglassEmpty, SportsScore } from "@mui/icons-material";
+import { HourglassEmpty, SportsScore } from '@mui/icons-material/';
 
 
 const Feed = (props) => {
@@ -24,7 +24,6 @@ const Feed = (props) => {
     useEffect(() => {
         document.addEventListener("scroll", scrollHandler)
         document.addEventListener("feedIsOpened", scrollHandler)
-        document.dispatchEvent(new Event("feedIsOpened"))
         return function () {
             document.removeEventListener("scroll", scrollHandler)
             document.removeEventListener("feedIsOpened", scrollHandler)

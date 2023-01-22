@@ -16,7 +16,7 @@ import { Outlet, createBrowserRouter, Navigate, RouterProvider } from "react-rou
 import Profile from './components/Profile/Profile';
 import { useEffect } from 'react';
 import { checkAuth, setStatusAndError } from './redux/authSlice';
-import { setPathnameUserId } from './redux/profileSlice';
+import { fetchUser, setPathnameUserId } from './redux/profileSlice';
 import { clearPosts, setFolder, setPosts, setSection } from './redux/feedSlice';
 
 
@@ -27,6 +27,7 @@ function App() {
 
   const currentUser = useSelector((state) => state.auth.currentUser);
   const darkmode = useSelector((state) => state.darkmode)
+  const user = useSelector((state) => state.profile.pathnameUserId)
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
@@ -38,36 +39,34 @@ function App() {
   // REACT ROUTER loaders
 
   const authLoader = () => {
-    dispatch(setStatusAndError({status: "", error: ""}))
+    setTimeout(() => { dispatch(setStatusAndError({ status: "", error: "" })) }, 0)
     return null
   }
 
   const feedLaoder = ({ params }) => {
+
     dispatch(setFolder(params.folder))
-    setTimeout(() => { document.dispatchEvent(new Event("feedIsOpened")) }, 0);
+    document.dispatchEvent(new Event("feedIsOpened"))
+
     return null
   }
 
   const profileLaoder = ({ params }) => {
-    if (params?.userId && params.userId.length > 5) {
-      dispatch(setPathnameUserId(params.userId))
-    }
-    dispatch(clearPosts({ folder: "profile" }))
+    dispatch(setPathnameUserId(params.userId))
     dispatch(setFolder("profile"))
-    setTimeout(() => {
-      document.dispatchEvent(new Event("feedIsOpened"))
-    }, 0);
+    document.dispatchEvent(new Event("feedIsOpened"))
+
     return null
   }
 
   const usersLaoder = () => {
-    setTimeout(() => {
-      document.dispatchEvent(new Event("usersIsOpened"))
-    }, 0);
+
+    document.dispatchEvent(new Event("usersIsOpened"))
+
     return null
   }
 
-   // REACT ROUTER creating ProtectedRoutes
+  // REACT ROUTER creating ProtectedRoutes
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {

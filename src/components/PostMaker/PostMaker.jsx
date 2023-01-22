@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "./PostMaker.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { PlaylistAdd, AddAPhoto, Publish, DragHandle, DeleteForever, HourglassEmpty } from "@material-ui/icons";
+import { PlaylistAdd, AddAPhoto, Publish, DragHandle, DeleteForever, HourglassEmpty } from '@mui/icons-material/';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   changeTitle as changeTitle_AC,
