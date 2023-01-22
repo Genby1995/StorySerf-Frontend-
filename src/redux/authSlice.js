@@ -73,8 +73,6 @@ export const login = createAsyncThunk(
         // Taking and validation date befor fetching to API 
         const loginData = getState().auth.login
 
-        console.log(loginData.username, loginData.password);
-
         if (loginData.username.length < 1 || loginData.password.length < 1) {
             return rejectWithValue("Не оставляйте поля пустым.")
         } else if (loginData.username.length < 3 || loginData.password.length < 6) {
