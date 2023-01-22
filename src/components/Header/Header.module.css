@@ -1,0 +1,152 @@
+/*MAIN*/
+.headerWrapper{
+    position: sticky;
+    top: 0;
+    height: 80px;
+    background-color: var(--color-main);
+    border-bottom: solid 1px var(--color-stroke);
+    z-index: 100;
+    box-shadow: 0 0 20px black;
+}
+
+.headerContainer{
+    height: 100%;
+    max-width: 1140px;
+    margin-inline: auto;
+    
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+/*MAIN*/
+
+/*LEFT*/
+.headeLogoContainer{
+    display: flex;
+    height: 100%;
+    flex-flow: row;
+    align-items: center;
+    flex-wrap: nowrap;
+} 
+.logoName{
+    color: var(--color-text);
+    font-size: 8vh;
+    font-family: 'Amatic SC';
+    text-shadow: 1px 1px 1px black;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.logoName:active{
+    color: var(--color-char);
+}
+.charColor{
+    color: var(--color-char);
+}
+.img{
+    height: 100%;
+}
+/*LEFT*/
+
+/*CENTER SEARCH*/
+.headerSearchContainer{
+    padding: 0.5rem;
+    display: flex;
+    height: 2.5rem;
+    flex-flow: row;
+    align-items: center;
+    background-color: var(--color-main-dark);
+    outline: solid 1px var(--color-bkg);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.searchInput::placeholder{
+    color: var(--color-text-dark);
+}
+
+.headerSearchContainer:has(.searchInput:focus) {
+    outline: solid 1px var(--color-char);
+}
+.icon{
+    cursor: pointer;
+    position: relative;
+    font-size: 1.5rem;
+}
+.searchInput{
+    max-width: 300px;
+    min-width: 160px;
+    background-color: var(--color-main-dark);
+    color: var(--color-text);
+    font-size: 0.8rem;
+}
+/*CENTER SEARCH*/
+
+/*CENTER NAV*/
+.headeNavContainer{
+    display: flex;
+    height: 100%;
+    flex-flow: row;
+}
+.navItem{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--color-text);
+    
+    transition: all 0.2s;
+    border-top: solid 0px transparent;;
+    border-bottom: solid 0px var(--color-char);;
+}
+.navItem:hover,
+.navItem:focus{
+    border-top: solid 3px transparent;;
+    border-bottom: solid 3px var(--color-char);;
+}
+.navItem.active,
+.navItem:active
+{
+    background-color: var(--color-char-trans);
+    border-top: solid 3px transparent;;
+    border-bottom: solid 3px var(--color-char);;
+}
+
+/*CENTER NAV*/
+
+/*RIGHT PROFILE*/
+.headerProfile{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url("../../img/avatar_my.jpg") center;
+    background-size: cover;
+    cursor: pointer;
+  }
+
+.notification{
+    position: absolute;
+   padding-inline: 2px;
+    border-radius: 7.5px;
+    right: -5px;
+    top: -5px;
+    height: 15px;
+    min-width: 15px;
+    color: var(--color-text);
+    background-color: var(--color-char);
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+    line-height: 15px;
+    box-shadow: 0 0 5px black;
+}
+/*RIGHT PROFILE*/

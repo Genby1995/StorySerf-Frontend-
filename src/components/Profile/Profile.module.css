@@ -1,0 +1,276 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.content {
+  gap: 10px;
+  background-color: var(--color-bkg);
+}
+
+.posts {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-main);
+  overflow: hidden;
+  box-shadow: 0 0 5px black;
+}
+
+.profDscr {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "Avatar Basic"
+    "Actions About"
+    "Stat Stat";
+
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 200px auto;
+
+  padding: 10px;
+
+  border-top: solid 1px var(--color-stroke);
+  background-color: var(--color-main);
+  gap: 10px;
+}
+
+.profWallPaper {
+  position: relative;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+}
+
+.profWallPaperChange {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.30);
+  opacity: 0;
+  transition: all, 0.3s;
+  cursor: pointer;
+}
+
+.profWallPaper:hover .profWallPaperChange {
+  opacity: 0.8;
+}
+
+.profWallPaper:hover .profWallPaperChange:hover {
+  opacity: 1;
+}
+
+.avatarContainer {
+  position: relative;
+  align-self: stretch;
+  grid-area: Avatar;
+}
+
+.avatar {
+  position: absolute;
+  bottom: 0px;
+  left: 100px;
+  transform: translateX(-50%);
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  align-self: center;
+  justify-self: center;
+  border: 5px solid var(--color-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarChange {
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.30);
+  opacity: 0;
+  transition: all, 0.3s;
+  cursor: pointer;
+}
+
+.avatar:hover .avatarChange {
+  opacity: 0.8;
+}
+
+.avatar:hover .avatarChange:hover {
+  opacity: 1;
+}
+
+
+.dscrBasic {
+  grid-area: Basic;
+  align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  min-height: 65px;
+  padding: 10px;
+  background-color: var(--color-main-dark);
+  border-radius: 5px;
+}
+
+.dscrBasic h1 {
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+  font-weight: bold;
+  border-bottom: 1px var(--color-text) solid;
+}
+
+.dscrBasic h2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.dscrBasic h2 input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: normal;
+  border-radius: 5px;
+  color: var(--color-text);
+  background-color: var(--color-main);
+  outline: solid 1px var(--color-bkg);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.dscrBasic h2 input:focus {
+  outline: solid 1px var(--color-char);
+}
+
+.dscrAbout {
+  grid-area: About;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 10px;
+  background-color: var(--color-main-dark);
+  border-radius: 5px;
+}
+
+.dscrAbout h1 {
+  line-height: 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 1px var(--color-text) solid;
+}
+
+.dscrAbout p {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  white-space: pre-line;
+}
+
+.dscrAbout textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: normal;
+  border-radius: 5px;
+  color: var(--color-text);
+  background-color: var(--color-main);
+  outline: solid 1px var(--color-bkg);
+  overflow: hidden;
+  resize: none;
+  transition: all 0.3s;
+}
+
+.dscrAbout textarea:focus {
+  outline: solid 1px var(--color-char);
+}
+
+.dscrStat {
+  grid-area: Stat;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background-color: var(--color-main-dark);
+  border-radius: 5px;
+}
+
+.dscrActions {
+  grid-area: Actions;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+
+  padding: 10px;
+  background-color: var(--color-main-dark);
+  border-radius: 5px;
+}
+
+.actionButton {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: var(--color-char);
+  gap: 10px;
+  background-color: var(--color-char);
+  color: var(--color-char-text);
+  padding: 0.5rem;
+  opacity: 0.90;
+  transition: all 0.2s;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.actionButton a {
+  color: var(--color-text);
+}
+
+.actionButton:hover {
+  opacity: 1;
+}
+
+.actionButton:active {
+  box-shadow: 0 0 1rem var(--color-char);
+}
+
+.actionButton:focus {
+  opacity: 1;
+}

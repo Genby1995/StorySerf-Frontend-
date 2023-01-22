@@ -1,0 +1,13 @@
+.darkMode{
+  --color-text: rgb(220, 220, 220);
+  --color-text-dark: rgba(220, 220, 220, 0.75);
+  --color-text-warn: red;
+  --color-stroke: rgba(220, 220, 220, 0.25);
+  --color-bkg: rgb(30, 30, 30);
+  --color-main: rgb(60, 60, 60);
+  --color-main-light: rgb(125, 125, 125);
+  --color-main-dark: rgb(45, 45, 45);
+  --color-char: rgb(0, 100, 200);
+  --color-char-text: rgb(220, 220, 220);
+  --color-char-trans: rgba(0, 100, 200, .3);
+}

@@ -1,0 +1,18 @@
+.messageMy,
+.messageCo{
+    padding: 0.5rem;
+    border: solid 1px var(--color-stroke);
+    border-radius: 1rem;
+}
+
+.messageMy{
+    align-self: end;
+    background-color: var(--color-char);
+    color: var(--color-char-text)
+}
+
+.messageCo{
+    align-self: start;
+    background-color: var(--color-stroke);
+    color: var(--color-text)
+}

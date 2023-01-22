@@ -1,0 +1,131 @@
+/*MAIN*/
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sideMenuBlock {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+    border: solid 1px var(--color-stroke);
+    background-color: var(--color-main);
+    box-shadow: 0 0 10px black;
+}
+.icon {
+    cursor: pointer;
+    position: relative;
+    font-size: 1.5rem;
+}
+.item {
+    display: flex;
+    gap: 1rem;
+    color: var(--color-text);
+    align-items: center;
+    transition: all 0.3s;
+}
+.item.active {
+    color: var(--color-char);
+}
+.sticy {
+    position: sticky;
+    top: 90px;
+}
+
+/*MAIN*/
+
+/*PROFILE*/
+.sideProfile {
+    display: grid;
+    grid-template-areas:
+        'a nik'
+        'a name'
+        'a raiting'
+        'a exit';
+    grid-template-columns: 90px auto;
+    grid-template-rows: 15px 15px 15px 25px;
+    align-items: center;
+    gap: 10px;
+}
+
+/* .cover{
+    background-image: url('https://www.ejin.ru/wp-content/uploads/2017/09/5-805.jpg');
+    box-shadow: 0 -15px 10px 0 var(--color-main) inset;
+    background-position: center;
+    background-size: cover;
+  } */
+  
+.avatar {
+    grid-area: a;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+}
+.nikname {
+    grid-area: nik;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+.name {
+    grid-area: name;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+.raiting {
+    grid-area: raiting;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+.exit {
+    grid-area: exit;
+    display: flex;
+    gap: 0.5rem;
+    color: var(--color-text);
+    cursor: pointer;
+    align-items: center;
+    opacity: 0.65;
+    transition: all 0.3s;
+}
+.exit:hover,
+.exit:focus{
+    opacity: 1;
+}
+
+/*PROFILE*/
+
+/*BUTTON*/
+.button {
+    background-color: var(--color-char);
+    color: var(--color-char-text);
+    border-radius: 5px;
+    padding: 1rem;
+    opacity: 0.90;
+    transition: all 0.2s;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button a {
+    color: var(--color-text);
+}
+
+.button:hover {
+    opacity: 1;
+}
+
+.button:active {
+    box-shadow: 0 0 1rem var(--color-char);
+}
+
+.button:focus {
+    opacity: 1;
+}
+
+/*BUTTON*/

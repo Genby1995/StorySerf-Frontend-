@@ -1,0 +1,42 @@
+.companion a{
+    color: var(--color-text);
+}
+
+.companion .active > .companionBlock {
+    background-color: var(--color-char-trans);
+}
+
+.companionBlock{
+    display: grid;
+    border-radius: 5px;
+    grid-template-areas: 
+        "a n t"
+        "a l r";
+    grid-template-columns: 60px auto 50px;
+    grid-template-rows: 30px 30px;
+    align-items:center;
+    column-gap: 5px;
+
+    transition: all 0.3s;
+}
+
+.companionAvatar{
+    grid-area: a;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-image: url('../../../img/no_avatar.png');
+    background-position: center;
+    background-size: cover;
+    align-self:center;
+    justify-self: center;
+}
+
+.companionLastMessage{
+    grid-area: l;
+}
+
+.companionLastMessageTime{
+    grid-area: t;
+}
+
