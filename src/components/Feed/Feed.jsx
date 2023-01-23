@@ -9,21 +9,20 @@ import { fetchPosts, setPosts } from "../../redux/feedSlice"
 import { HourglassEmpty, SportsScore } from '@mui/icons-material/';
 
 
-const Feed = (props) => {
+const Feed = () => {
 
     //React-Redux
     const dispatch = useDispatch();
-
     const folder = useSelector((state) => state.feed.folder);
     const status = useSelector((state) => state.feed.status);
     const error = useSelector((state) => state.feed.error);
     const searchString = useSelector((state) => state.searchString.searchString)
     const postsData = useSelector((state) => state.feed["postsData_" + folder]);
 
-
     useEffect(() => {
         document.addEventListener("scroll", scrollHandler)
         document.addEventListener("feedIsOpened", scrollHandler)
+        document.dispatchEvent(new Event("feedIsOpened"))
         return function () {
             document.removeEventListener("scroll", scrollHandler)
             document.removeEventListener("feedIsOpened", scrollHandler)
@@ -47,9 +46,11 @@ const Feed = (props) => {
         const scrollHeight = e.target.documentElement.scrollHeight
         const scrollTop = e.target.documentElement.scrollTop
         const windowHeight = window.innerHeight
-        if (scrollHeight - (scrollTop + windowHeight) < 100) getPosts();
+        if ((postsDataEdited.length < 1)
+            || (scrollHeight - (scrollTop + windowHeight) < 100)) {
+            getPosts();
+        }
     }
-
 
     const getPosts = () => {
         dispatch(fetchPosts())

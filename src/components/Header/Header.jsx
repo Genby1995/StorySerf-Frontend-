@@ -22,6 +22,8 @@ const Header = () => {
 
     const handleChangeSearchString = (e) => {
         dispatch(changeSearchString_AC(e.target.value))
+        document.dispatchEvent(new Event("feedIsOpened"))
+        document.dispatchEvent(new Event("usersIsOpened"))
     }
 
     return (
@@ -49,12 +51,6 @@ const Header = () => {
                         Лучшее
                     </NavLink>
                     <NavLink
-                        to="/feed/follows"
-                        className={s.navItem}
-                        activeClassName={s.active}>
-                        Подписки
-                    </NavLink>
-                    <NavLink
                         to="/users"
                         className={s.navItem}
                         activeClassName={s.active}>
@@ -69,7 +65,7 @@ const Header = () => {
                             maxLength="20"
                             onChange={handleChangeSearchString}
                             type="text"
-                            placeholder="Введите название поста" />
+                            placeholder="Введите название поста или юзера" />
                         <Search className={s.icon} />
                     </label>
                     <div>
@@ -77,11 +73,10 @@ const Header = () => {
                             ? <Brightness3 className={s.icon} onClick = {toggleDarkMode}/> 
                             : <Brightness7 className={s.icon} onClick = {toggleDarkMode}/>}
                     </div>
-                    <div className={s.icon}>
+                    {/* <div className={s.icon}>
                         <Notifications className={s.icon} />
                         <div className={s.notification}>5</div>
-                    </div>
-                    <div className={s.avatar} />
+                    </div> */}
                 </div>
             </div>
         </header >

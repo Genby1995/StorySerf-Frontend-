@@ -32,7 +32,7 @@ const SideMenu = () => {
 
       <div className={s.sideMenuBlock}>
         <div className={s.sideProfile}>
-          <Link className={s.avatar} style={avatarBgImg} to={currentUserPath}/>
+          <Link className={s.avatar} style={avatarBgImg} to={currentUserPath} />
           <div className={s.nikname}> {currentUser.username} </div>
           <div className={s.name}> {`${currentUser.familyName} ${currentUser.firstName}`} </div>
           <div className={s.raiting}> {`Рейтинг: ${currentUser.raiting}`} </div>
@@ -81,11 +81,11 @@ const SideMenu = () => {
           </NavLink>
 
           <NavLink
-            to="/followers"
+            to="/feed/follows"
             className={s.item}
             activeClassName={s.active}>
             <People className={s.icon} />
-            Мои подписки и подписчики
+            Посты по моим подпискам
           </NavLink>
 
         </nav>

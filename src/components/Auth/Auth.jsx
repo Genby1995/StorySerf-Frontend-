@@ -30,7 +30,11 @@ const Auth = (props) => {
         e.preventDefault();
         dispatch(login_AC());
     }
-    
+
+    // VARIOABLES 
+    const registerBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.5)), center / cover url(/images/login_right_background.jpg)' }
+    const loginBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.5)), center / cover url(/images/login_left_background.jpg)' }
+
     // RENDER
 
     return (
@@ -59,7 +63,7 @@ const Auth = (props) => {
                                 ? <div className={s.message + " " + s.warning}>  {errorMessage} </div>
                                 : <div className={s.message}>
                                     {loadingStatus == "resolved"
-                                        ? "Регистрация выполнена" 
+                                        ? "Регистрация выполнена"
                                         : "Введите данные для регистрации"}
                                 </div>
                             }
@@ -161,9 +165,12 @@ const Auth = (props) => {
                 </div>
 
                 {/*WELKOME HALF */}
-                <div className={currentActivity == "login"
-                    ? s.loginWelcome
-                    : s.registerWelcome}>
+                <div
+                    style={currentActivity == "login"
+                        ? loginBkg
+                        : registerBkg}
+                    className={s.welcome}>
+
 
                     <h1>Welcome to</h1>
                     <div className={s.logoName}>

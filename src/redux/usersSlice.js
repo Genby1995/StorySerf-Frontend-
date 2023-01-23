@@ -72,15 +72,17 @@ const usersSlice = createSlice({
         status: null,
         error: null,
         usersData: [],
+        usersSection: "all",
     },
 
     reducers: {
         changeInput(state, action) {
             state.userEdit[`${action.payload.inputName}`] = action.payload.inputData
         },
-        setMessage(state, action) {
-            state[`${action.payload.activityName}`].message.text = action.payload.message
-            state[`${action.payload.activityName}`].message.color = action.payload.color
+        setUsersSection(state, action) {
+            const { sectionName } = action.payload
+
+            state.usersSection = sectionName
         },
     },
 
@@ -122,9 +124,5 @@ const usersSlice = createSlice({
 export default usersSlice.reducer;
 export const {
     changeInput,
-    setShouldFetch,
-    setMessage,
-    submitChanges,
-    setIsCurrentlyEdited,
-    setPathnameUserId,
+    setUsersSection,
 } = usersSlice.actions;

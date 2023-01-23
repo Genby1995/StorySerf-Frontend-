@@ -39,30 +39,34 @@ function App() {
   // REACT ROUTER loaders
 
   const authLoader = () => {
-    setTimeout(() => { dispatch(setStatusAndError({ status: "", error: "" })) }, 0)
+    setTimeout(() => { dispatch(setStatusAndError({ status: "", error: "" })) }, 0);
     return null
   }
 
   const feedLaoder = ({ params }) => {
-
-    dispatch(setFolder(params.folder))
-    document.dispatchEvent(new Event("feedIsOpened"))
-
+    console.log(params.folder);
+    setTimeout(() => {
+      dispatch(setFolder(params.folder));
+      document.dispatchEvent(new Event("feedIsOpened"))
+    }, 0)
+    setTimeout(() => { document.dispatchEvent(new Event("feedIsOpened")) }, 0);
     return null
   }
 
   const profileLaoder = ({ params }) => {
-    dispatch(setPathnameUserId(params.userId))
-    dispatch(setFolder("profile"))
-    document.dispatchEvent(new Event("feedIsOpened"))
-
+    setTimeout(() => {
+      dispatch(setPathnameUserId(params.userId))
+      dispatch(clearPosts({ folder: "profile" }))
+      dispatch(setFolder("profile"));
+      document.dispatchEvent(new Event("feedIsOpened"))
+    }, 0);
+    setTimeout(() => { document.dispatchEvent(new Event("feedIsOpened")) }, 0);
     return null
   }
 
   const usersLaoder = () => {
-
     document.dispatchEvent(new Event("usersIsOpened"))
-
+    setTimeout(() => { document.dispatchEvent(new Event("usersIsOpened")) }, 0);
     return null
   }
 
@@ -116,7 +120,7 @@ function App() {
         },
         {
           path: '/feed/:folder',
-          element: <Feed />,
+          element: <Feed folder="best" />,
           loader: feedLaoder,
         },
         {

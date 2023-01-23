@@ -9,7 +9,7 @@ const DialogCompanion = (props) => {
       <div className={s.companion}>
         <NavLink to={path} activeClassName={s.active}>
           <div className={s.companionBlock}>
-            <div className={s.companionAvatar} /*style={{backgroundImage: `url(${props.avatar})`}}*/ ></div>
+            <div className={s.companionAvatar}  style={{ backgroundImage: 'url(/images/no_avatar.png)', }} ></div>
             <div className={s.companionName}>{props.name}</div>
             <div className={s.companionLastMessage}>Давай, пока!</div>
             <div className={s.companionLastMessageTime}>12:51</div>

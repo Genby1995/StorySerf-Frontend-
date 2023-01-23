@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {
     fetchUsers as fetchUsers_AC,
     toggleFollowUser as toggleFollowUser_AC,
+    setUsersSection as setUsersSection_AC,
 } from "../../redux/usersSlice"
 
 import {
@@ -30,6 +31,8 @@ const Users = (props) => {
     const error = useSelector((state) => state.users.error);
     const usersData = useSelector((state) => state.users.usersData);
     const currentUser = useSelector((state) => state.auth.currentUser)
+    const usersSection = useSelector((state) => state.users.usersSection)
+    const searchString = useSelector((state) => state.searchString.searchString)
 
     useEffect(() => {
         document.addEventListener("scroll", scrollHandler)
@@ -43,12 +46,36 @@ const Users = (props) => {
 
     //Variables
 
+    let usersDataEdited = []
+    if (usersData instanceof Array && usersData.length > 0) {
+        usersDataEdited = [...usersData]
+    }
+
+    if (usersSection == "followings") {
+        usersDataEdited = usersDataEdited.filter((item) => currentUser.followings.includes(item._id))
+    } else if (usersSection == "followers") {
+        usersDataEdited = usersDataEdited.filter((item) => currentUser.followers.includes(item._id))
+    }
+
+    if (searchString && typeof searchString == "string" && searchString.length > 0) {
+        usersDataEdited = usersDataEdited.filter((item) => {
+            return (
+                item.firstName.toLowerCase().includes(searchString.toLowerCase())
+                || item.familyName.toLowerCase().includes(searchString.toLowerCase())
+                || item.username.toLowerCase().includes(searchString.toLowerCase())
+            )
+        })
+    }
+
     //Handlers
     const scrollHandler = (e) => {
         const scrollHeight = e.target.documentElement.scrollHeight
         const scrollTop = e.target.documentElement.scrollTop
         const windowHeight = window.innerHeight
-        if (scrollHeight - (scrollTop + windowHeight) < 100) fetchUsers();
+        if ((usersDataEdited.length < 1)
+            || (scrollHeight - (scrollTop + windowHeight) < 100)) {
+            fetchUsers();
+        }
     }
 
     const fetchUsers = () => {
@@ -65,46 +92,78 @@ const Users = (props) => {
         }));
     }
 
+    const handleSetUsersSection = (e) => {
+        const { name } = e.target.dataset
+        dispatch(setUsersSection_AC({ sectionName: name }));
+        document.dispatchEvent(new Event("usersIsOpened"));
+    }
+
     //Render
     return (
         <div className={s.wrapper}>
             <div className={s.content}>
+                <div className={s.userSections}>
+                
+                    <span
+                        onClick={handleSetUsersSection}
+                        data-name="followers"
+                        className={usersSection == "followers"
+                            ? s.userSection + " " + s.current
+                            : s.userSection}>
+                        Мои подписчики
+                    </span>
+                    <span
+                        onClick={handleSetUsersSection}
+                        data-name="followings"
+                        className={usersSection == "followings"
+                            ? s.userSection + " " + s.current
+                            : s.userSection}>
+                        Мои подписки
+                    </span>
+                    <span
+                        onClick={handleSetUsersSection}
+                        data-name="all"
+                        className={usersSection == "all"
+                            ? s.userSection + " " + s.current
+                            : s.userSection}>
+                        Все пользователи
+                    </span>
+
+                </div>
                 <div className={s.users}>
-                    {usersData
-                        ? usersData.map((user, index) => {
-                            let avatarBgImg = { backgroundImage: 'url(/images/no_avatar.png)', };
-                            if (user?.avatarImg && user?.avatarImg.length > 5) {
-                                avatarBgImg = { backgroundImage: 'url(' + user?.avatarImg + ')', };
-                            }
-                            const isFollowed = currentUser.followings.includes(user._id)
-                            return (
-                                <div className={s.userBlock} key={user._id}>
-                                    <Link className={s.avatar} style={avatarBgImg} to={`/profile/${user._id}`} />
-                                    <div className={s.nikname}> {user.username} </div>
-                                    <div className={s.name}> {`${user.familyName} ${user.firstName}`} </div>
-                                    <div className={s.actions}>
-                                        <button
-                                            data-userid={user._id}
-                                            data-userindex={index}
-                                            data-isfollowed={isFollowed}
-                                            name="edit"
-                                            className={isFollowed
-                                                ? s.actionButton + " " + s.followed
-                                                : s.actionButton + " " + s.notFollowed}
-                                            onClick={handleToggleSubscription}>
-                                            {/* {isFollowed ? <NotificationsOffIcon /> : <NotificationAddIcon />} */}
-                                            {isFollowed ? "Отписаться" : "Подписаться"}
-                                        </button>
-                                    </div>
-                                    <div className={s.info}>
-                                        <span className={s.icon}> <Article />: {user?.myPosts?.length}</span>
-                                        <span className={s.icon}> <Grade />: {user?.raiting}</span>
-                                        <span className={s.icon}> <Notifications />: {user?.followers?.length}</span>
-                                    </div>
+                    {usersDataEdited.map((user, index) => {
+                        let avatarBgImg = { backgroundImage: 'url(/images/no_avatar.png)', };
+                        if (user?.avatarImg && user?.avatarImg.length > 5) {
+                            avatarBgImg = { backgroundImage: 'url(' + user?.avatarImg + ')', };
+                        }
+                        const isFollowed = currentUser.followings.includes(user._id)
+                        return (
+                            <div className={s.userBlock} key={user._id}>
+                                <Link className={s.avatar} style={avatarBgImg} to={`/profile/${user._id}`} />
+                                <div className={s.nikname}> {user.username} </div>
+                                <div className={s.name}> {`${user.familyName} ${user.firstName}`} </div>
+                                <div className={s.actions}>
+                                    <button
+                                        data-userid={user._id}
+                                        data-userindex={index}
+                                        data-isfollowed={isFollowed}
+                                        name="edit"
+                                        className={isFollowed
+                                            ? s.actionButton + " " + s.followed
+                                            : s.actionButton + " " + s.notFollowed}
+                                        onClick={handleToggleSubscription}>
+                                        {/* {isFollowed ? <NotificationsOffIcon /> : <NotificationAddIcon />} */}
+                                        {isFollowed ? "Отписаться" : "Подписаться"}
+                                    </button>
                                 </div>
-                            )
-                        })
-                        : ""
+                                <div className={s.info}>
+                                    <span className={s.icon}> <Article />: {user?.myPosts?.length}</span>
+                                    <span className={s.icon}> <Grade />: {user?.raiting}</span>
+                                    <span className={s.icon}> <Notifications />: {user?.followers?.length}</span>
+                                </div>
+                            </div>
+                        )
+                    })
                     }
                 </div>
                 {status == "loading"

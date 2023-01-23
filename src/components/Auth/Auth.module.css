@@ -35,11 +35,9 @@ h1 {
 /*MAIN*/
 
 /*WELCOME HALF*/
-.registerWelcome,
-.loginWelcome {
+.welcome {
     flex-grow: 1;
     flex-basis: 300px;
-    background-size: cover;
 
     display: flex;
     flex-direction: column;
@@ -49,18 +47,6 @@ h1 {
 
     color: var(--color-char-text);
     font-size: 1rem;
-}
-
-.registerWelcome {
-    background:
-        linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.5)),
-        url(../../img/login_right_background.jpg) center no-repeat;
-}
-
-.loginWelcome {
-    background:
-        linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.3)),
-        url(../../img/login_left_background.jpg) center no-repeat;
 }
 
 .logoName {

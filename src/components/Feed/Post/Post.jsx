@@ -1,16 +1,16 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import s from "./Post.module.css";
-import { Comment, DeleteForever, HourglassEmpty } from '@mui/icons-material/';
+import { BookmarkAdd, BookmarkRemove, Comment, DeleteForever, HourglassEmpty } from '@mui/icons-material/';
 import {
     togglePostVisability as togglePostVisability_AC,
     fetchLikeDislike as fetchLikeDislike_AC,
     setAutorsAvatar as setAutorsAvatar_AC,
     deletePost as deletePost_AC,
+    togglePostBookmark as togglePostBookmark_AC,
 } from "../../../redux/feedSlice"
 import { useSelector } from "react-redux";
 import $api from "../../../http";
-
 
 
 const Post = (props) => {
@@ -18,10 +18,7 @@ const Post = (props) => {
     //React-Redux
     const currentUser = useSelector((state) => state.auth.currentUser);
     const currentPost = useSelector((state) => state.feed["postsData_" + props.folder][props.index]);
-    const isLiked = props.post.likes.find((item) => item == currentUser._id)
-    const isDisliked = props.post.dislikes.find((item) => item == currentUser._id)
-    const isOwnPost = (props.post.authorId == currentUser._id)
-    const isLoading = useSelector((state) => state.feed["postsData_" + props.folder][props.index].status);
+    const loadingPosts = useSelector((state) => state.feed.loadingPosts);
 
     useEffect(() => {
         $api.get(`/users/get_one_avatar/${props.post.authorId}`) //$api - imported with settings 
@@ -70,7 +67,27 @@ const Post = (props) => {
         }
     }
 
+    const handleTogglePostBookmark = () => {
+        const postId = props.post._id
+        const post = props.post
+        const userId = currentUser._id
+        const todo = isBookmarked ? "remove" : "add"
+        props.dispatch(togglePostBookmark_AC({
+            post: post,
+            todo: todo,
+            userId: userId
+        }))
+    }
+
     //Variables
+
+    const isLoading = loadingPosts.includes(props.post._id)
+    const isBookmarked = currentUser.favoritePosts.includes(props.post._id)
+    const isLiked = props.post.likes.includes(currentUser._id)
+    const isDisliked = props.post.dislikes.includes(currentUser._id)
+    const isOwnPost = (props.post.authorId == currentUser._id)
+
+
 
     let avatarBgImg = { backgroundImage: 'url(/images/no_avatar.png)', };
     if (currentPost?.avatarImg && currentPost?.avatarImg.length > 5) {
@@ -120,7 +137,7 @@ const Post = (props) => {
                             <path onClick={toggleLike} d="M6.660,8.922 L6.660,8.922 L2.350,13.408 L0.503,11.486 L4.813,7.000 L0.503,2.515 L2.350,0.592 L8.507,7.000 L6.660,8.922 Z" />
                         </svg>
                     </div>
-                    <div className={s.likesCount}>{isLoading == "loading" ? <HourglassEmpty /> : props.post.likes.length - props.post.dislikes.length}</div>
+                    <div className={s.likesCount}>{isLoading ? <HourglassEmpty /> : props.post.likes.length - props.post.dislikes.length}</div>
                     <div data-name="dislike" className={isDisliked ? s.likesDecrementActivated : s.likesDecrement}>
                         <svg className={s.arrow} viewBox="0 0 9 14">
                             <path onClick={toggleLike} d="M6.660,8.922 L6.660,8.922 L2.350,13.408 L0.503,11.486 L4.813,7.000 L0.503,2.515 L2.350,0.592 L8.507,7.000 L6.660,8.922 Z" />
@@ -147,10 +164,14 @@ const Post = (props) => {
                     {postContent}
                 </div>
                 <div className={s.actions}>
-                    <span className={s.actions__item}>
-                        <Comment className={s.icon} />
-                        Комментарии
-                    </span>
+                    {isBookmarked
+                        ? < span className={s.actions__item} onClick={handleTogglePostBookmark}>
+                            <BookmarkRemove className={s.icon} /> Убрать из закладок
+                        </span>
+                        : < span className={s.actions__item} onClick={handleTogglePostBookmark}>
+                            <BookmarkAdd className={s.icon} /> Добавить в закладки
+                        </span>
+                    }
                     {isOwnPost
                         ? <span className={s.actions__item} onClick={handleDeletePost}>
                             <DeleteForever className={s.icon} />

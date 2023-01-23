@@ -3,7 +3,52 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  gap: 10px;
+}
+
+.userSections {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 10px;
+  border-radius: 5px;
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-main);
+  box-shadow: 0 0 10px black;
+}
+
+.userSection {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: var(--color-text);
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-stroke);
+  transition: all 0.2s;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.userSection:hover {
+  opacity: 1;
+}
+
+.userSection:active {
+  box-shadow: 0 0 10px var(--color-char);
+}
+
+.current {
+  background-color: var(--color-char);
 }
 
 .users {
@@ -121,7 +166,7 @@
   gap: 10px;
   color: var(--color-char-text);
   padding: 0.35rem;
-  opacity: 0.90;
+  opacity: 0.9;
   transition: all 0.2s;
   text-align: center;
   cursor: pointer;
@@ -131,6 +176,7 @@
 
 .notFollowed {
   background-color: var(--color-stroke);
+  color:var(--color-text);
 }
 
 .followed {

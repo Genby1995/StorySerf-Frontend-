@@ -49,18 +49,8 @@ const Profile = (params) => {
         if (shouldFetch.current) {
             shouldFetch = false;
             getUser();
-            // getPosts();
         }
     }, [pathnameUserId])
-
-
-    const getPosts = () => {
-        return console.log("get posts");
-
-        // dispatch(fetchPosts({ lastPostDate: postsData.length
-        //     ?  postsData[postsData.length - 1].createdAt
-        //     : false }))
-    }
 
     const getUser = () => {
         dispatch(fetchUser_AC({ userId: pathnameUserId }))
@@ -219,7 +209,7 @@ const Profile = (params) => {
     return (
 
         <div className={s.wrapper}>
-            
+
             {(status == "loading")
                 ? <span className={s.veil}><HourglassEmpty /> Загрузка</span>
                 : ""}

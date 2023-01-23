@@ -169,6 +169,9 @@ const authSlice = createSlice({
         },
         setCurrentUserFollowings(state, action) {
             state.currentUser.followings = action.payload
+        },
+        setCurrentUserBookmarks(state, action) {
+            state.currentUser.favoritePosts = action.payload
         }
     },
 
@@ -238,4 +241,5 @@ export const {
     setMessage,
     setCurrentUser,
     setCurrentUserFollowings,
+    setCurrentUserBookmarks,
 } = authSlice.actions;
