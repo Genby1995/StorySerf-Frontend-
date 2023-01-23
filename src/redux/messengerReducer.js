@@ -5,10 +5,10 @@ const NEW_MESSAGE_CHANGE = 'NEW_MESSAGE_CHANGE';
 //Initialization
 let initialState = {
     companionsData: [
-        {id:"1", name: "Андрей", avatar: "../../../img/avatar_andr.jpg"},
-        {id: "2", name: "Игорь", avatar: "../../../img/avatar_igor.jpg"},
-        {id:"3", name:"Света", avatar: "../../../img/avatar_svet.jpg"}, 
-        {id:"4", name:"Антон", avatar: "../../../img/avatar_ant.jpg"},
+        {id:"1", name: "Антонио", avatar: "../../../img/avatar_andr.jpg"},
+        {id: "2", name: "Инлесиас", avatar: "../../../img/avatar_igor.jpg"},
+        {id:"3", name:"Саманта", avatar: "../../../img/avatar_svet.jpg"}, 
+        {id:"4", name:"Эндрю", avatar: "../../../img/avatar_ant.jpg"},
     ],
     
     messagesData: [

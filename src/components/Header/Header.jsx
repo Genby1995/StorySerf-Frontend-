@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch} from "react-redux"
-import { actionNames, initialState } from "../../redux/darkmodeReducer";
 
 import s from "./Header.module.css";
 import { Search, Notifications, Brightness3, Brightness7 } from '@mui/icons-material/';
