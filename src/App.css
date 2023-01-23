@@ -39,3 +39,19 @@ body {
   position: absolute;
   bottom: 0;
 }
+
+@media (max-width: 800px) {
+
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  html,
+  body {
+    font-size: 13px;
+  }
+}

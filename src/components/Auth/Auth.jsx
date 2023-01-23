@@ -3,6 +3,7 @@ import s from "./Auth.module.css"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeInput, changeCurrentActivity, login as login_AC, register as register_AC } from "../../redux/authSlice";
+import { ArrowDownward } from "@mui/icons-material";
 
 const Auth = (props) => {
 
@@ -30,19 +31,27 @@ const Auth = (props) => {
         e.preventDefault();
         dispatch(login_AC());
     }
+    const handleShowForm = (e) => {
+        window.scrollBy({
+            top: 1000,
+            left: 0,
+            behavior: "smooth"
+        })
+    }
 
     // VARIOABLES 
-    const registerBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.5)), center / cover url(/images/login_right_background.jpg)' }
-    const loginBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.8), rgba(0, 50, 100, 0.5)), center / cover url(/images/login_left_background.jpg)' }
+    const registerBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.6), rgba(0, 50, 100, 0.4)), center / cover url(/images/login_right_background.jpg)' }
+    const loginBkg = { background: 'center / cover linear-gradient(rgba(0, 50, 100, 0.6), rgba(0, 50, 100, 0.4)), center / cover url(/images/login_left_background.jpg)' }
 
     // RENDER
 
     return (
         <div className={s.background}>
-            <div className={s.container} style={currentActivity == "register"
-                ? { flexDirection: "row-reverse" }
-                : { flexDirection: "row" }
-            }>
+            <div className={s.container}
+            // style={currentActivity == "register"
+            //     ? { flexDirection: "row-reverse" }
+            //     : { flexDirection: "row" }}
+            >
 
                 {/*REGISTER INPUT HALF */}
                 <div className={currentActivity == "register"
@@ -202,6 +211,14 @@ const Auth = (props) => {
                             className={s.button}>
                             Авторизоваться
                         </Link>
+                    }
+                    {currentActivity == "login"
+                        ? <div className={s.welcomeHint} onClick={handleShowForm}>
+                            <ArrowDownward />Форма авторизации<ArrowDownward />
+                        </div>
+                        : <div className={s.welcomeHint} onClick={handleShowForm}>
+                            <ArrowDownward />Форма регистрации<ArrowDownward />
+                        </div>
                     }
                 </div>
 

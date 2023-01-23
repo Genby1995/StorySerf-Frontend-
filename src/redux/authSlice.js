@@ -218,7 +218,6 @@ const authSlice = createSlice({
         },
         //LOGGIN OUT
         [logout.pending]: (state) => {
-            console.log("Я тут");
             state.status = "loading";
             state.error = null
         },
