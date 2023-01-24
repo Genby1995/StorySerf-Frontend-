@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/StorySurf-Frontend-/static/css/main.9f0c8822.css",
+    "main.js": "/StorySurf-Frontend-/static/js/main.4af06e93.js",
+    "index.html": "/StorySurf-Frontend-/index.html",
+    "main.9f0c8822.css.map": "/StorySurf-Frontend-/static/css/main.9f0c8822.css.map",
+    "main.4af06e93.js.map": "/StorySurf-Frontend-/static/js/main.4af06e93.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f0c8822.css",
+    "static/js/main.4af06e93.js"
+  ]
+}
