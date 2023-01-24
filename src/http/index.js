@@ -16,7 +16,6 @@ $api.interceptors.request.use((config) => {
 
 
 $api.interceptors.response.use(
-
    
     (config) => config ,
     
