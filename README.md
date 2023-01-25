@@ -1,6 +1,6 @@
 # StorySurf 
 
-https://storysurf.onrender.com
+http://45.80.68.166:3000/ - деплой фронтэнда
 
 Социальная сеть "StorySerf".
 

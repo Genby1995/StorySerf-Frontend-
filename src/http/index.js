@@ -2,8 +2,8 @@ import axios from "axios";
 
 console.log(process.env);
 
-export const API_URL = process.env.REACT_APP_API_URL
-
+// export const API_URL = process.env.REACT_APP_API_URL
+export const API_URL = "http://45.80.68.166:8800/api"
 const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
