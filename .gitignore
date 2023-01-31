@@ -19,6 +19,9 @@
 .env.test.local
 .env.production.local
 
+# warning
+"!\320\275\320\265 \321\202\321\200\320\276\320\263\320\260\320\271 .ENV .warn"
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

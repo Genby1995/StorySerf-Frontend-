@@ -11,7 +11,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 1000;
+
 
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
@@ -19,7 +19,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  
+  z-index: 10;
+
 }
 
 .content {
@@ -273,4 +275,25 @@
 
 .actionButton:focus {
   opacity: 1;
+}
+
+@media (max-width: 550px) {
+  .profDscr {
+    grid-template-areas:
+      "Avatar"
+      "Basic"
+      "About"
+      "Stat"
+      "Actions";
+  
+    grid-template-rows: repeat(auto);
+    grid-template-columns: auto;
+  }
+
+  .avatar {
+    bottom: -10px;
+    left: 60px;
+    height: 110px;
+    width: 110px;
+  }
 }

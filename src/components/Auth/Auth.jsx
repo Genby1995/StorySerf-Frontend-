@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Auth.module.css"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeInput, changeCurrentActivity, login as login_AC, register as register_AC } from "../../redux/authSlice";
+import { changeInput, changeCurrentActivity, login as login_AC, register as register_AC, setStatusAndError as setStatusAndError_AC } from "../../redux/authSlice";
 import { ArrowDownward } from "@mui/icons-material";
 
 const Auth = (props) => {
@@ -37,6 +37,10 @@ const Auth = (props) => {
             left: 0,
             behavior: "smooth"
         })
+    }
+
+    const handleChangeActivity = (e) => {
+        dispatch(setStatusAndError_AC({ status: "", error: "" }))
     }
 
     // VARIOABLES 
@@ -181,7 +185,7 @@ const Auth = (props) => {
                     className={s.welcome}>
 
 
-                    <h1>Welcome to</h1>
+                    <h1 style={{ marginTop: "auto" }}>Welcome to</h1>
                     <div className={s.logoName}>
                         <span className={s.charColor}>S</span>
                         TORY
@@ -202,11 +206,13 @@ const Auth = (props) => {
                     </div>
                     {currentActivity == "login"
                         ? <Link
+                            onClick={handleChangeActivity}
                             to="/register"
                             className={s.button}>
                             Зарегистрироваться
                         </Link>
                         : <Link
+                            onClick={handleChangeActivity}
                             to="/login"
                             className={s.button}>
                             Авторизоваться

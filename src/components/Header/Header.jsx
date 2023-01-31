@@ -1,18 +1,19 @@
 import React from "react";
-import { useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import s from "./Header.module.css";
 import { Search, Notifications, Brightness3, Brightness7 } from '@mui/icons-material/';
 import { Link, NavLink as BaseNavLink } from "react-router-dom";
-import { toggleDarkmode } from "../../redux/darkmodeSlice";
+import { toggleDarkmode, toggleSideMenuOpen } from "../../redux/visualModeSlice";
 import { changeSearchString as changeSearchString_AC } from "../../redux/searchStringSlice";
 
 
 
 const Header = () => {
 
-    const darkmode = useSelector((state) => state.darkmode.darkmode)
+    const darkmode = useSelector((state) => state.visualMode.darkmode)
     const searchString = useSelector((state) => state.searchString.searchString)
+    const sideMenuOpen = useSelector((state) => state.visualMode.sideMenuOpen)
     const dispatch = useDispatch()
 
     const toggleDarkMode = () => {
@@ -25,11 +26,15 @@ const Header = () => {
         document.dispatchEvent(new Event("usersIsOpened"))
     }
 
+    const handleToggleSideMenuOpen = () => {
+        dispatch(toggleSideMenuOpen())
+    }
+
     return (
         <header className={s.headerWrapper}>
             <div className={s.headerContainer}>
                 <div className={s.headeLogoContainer}>
-                    <Link className={s.logoName}  to="/feed/fresh">
+                    <Link className={s.logoName} to="/feed/fresh">
                         <span className={s.charColor}>S</span>
                         TORY
                         <span className={s.charColor}>S</span>
@@ -68,9 +73,19 @@ const Header = () => {
                         <Search className={s.icon} />
                     </label>
                     <div>
-                        { darkmode
-                            ? <Brightness3 className={s.icon} onClick = {toggleDarkMode}/> 
-                            : <Brightness7 className={s.icon} onClick = {toggleDarkMode}/>}
+                        {darkmode
+                            ? <Brightness3 className={s.icon} onClick={toggleDarkMode} />
+                            : <Brightness7 className={s.icon} onClick={toggleDarkMode} />}
+                    </div>
+                    <div
+                        onClick={handleToggleSideMenuOpen}
+                        className={sideMenuOpen
+                            ? s.sideMenuToggler + " " + s.open
+                            : s.sideMenuToggler}>
+                        <span className={s.burger_top}></span>
+                        <span className={s.burger_middle1}></span>
+                        <span className={s.burger_middle2}></span>
+                        <span className={s.burger_bottom}></span>
                     </div>
                     {/* <div className={s.icon}>
                         <Notifications className={s.icon} />

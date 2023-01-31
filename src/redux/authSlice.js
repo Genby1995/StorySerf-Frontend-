@@ -21,15 +21,7 @@ export const checkAuth = createAsyncThunk(
                 return res.data.user
             })
             .catch((err) => {
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: err.response.data.message,
-                    color: "warning",
-                }))
                 throw rejectWithValue(err.payload)
-            })
-            .finally(() => {
-                dispatch(setShouldFetch(true));
             })
     },
     shouldFetchCondition// This condition canceles ASYNC function before execution.
@@ -38,27 +30,16 @@ export const checkAuth = createAsyncThunk(
 export const logout = createAsyncThunk(
     "auth/logout",
     async function (_, { rejectWithValue, getState, dispatch }) {
-        console.log("ASYNC");
+        console.log("Logout");
 
         // FETCHING //
         return await $api.post("/auth/logout") //$api - imported with settings 
             .then((res) => {
                 dispatch(setCurrentUser(null));
                 localStorage.removeItem("accessToken");
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: "Введите данные пользователя",
-                    color: "main",
-                }))
-                console.log("THEN");
+                dispatch(setStatusAndError({ status: "", error: "" }))
             })
             .catch((err) => {
-                dispatch(setMessage({
-                    activityName: "login",
-                    message: err.response.data.message,
-                    color: "warning",
-                }))
-                console.log("CATCH");
                 throw rejectWithValue(err.payload)
             })
     },
@@ -84,10 +65,9 @@ export const login = createAsyncThunk(
         // FETCHING //
         return await $api.post("/auth/login", loginData) //$api - imported with settings 
             .then((res) => {
-                const userData = res.data.user
-                dispatch(setCurrentUser(res.data.user));
-                localStorage.setItem("accessToken", res.data.accessToken);
-                return userData
+                const { user, accessToken } = res.data
+                localStorage.setItem("accessToken", accessToken);
+                return user
             })
             .catch((err) => {
                 throw rejectWithValue(err.response.data.message)
@@ -98,7 +78,7 @@ export const login = createAsyncThunk(
 );
 
 export const register = createAsyncThunk(
-    "posts/submitRegister",
+    "posts/register",
     async function (_, { rejectWithValue, getState, dispatch }) {
 
         // Taking last post date for fetching to API 
@@ -118,11 +98,10 @@ export const register = createAsyncThunk(
         // FETCHING //
         return $api.post("/auth/register", registerData) //$api - imported with settings 
             .then((res) => {
-                const { userData, accessToken } = res.data
-                if (accessToken) {
-                    localStorage.setItem("accessToken", accessToken);
-                }
-                return userData
+                const { user, accessToken } = res.data
+                localStorage.setItem("accessToken", accessToken);
+                console.log(res.data);
+                return user
             })
             .catch((err) => {
                 throw rejectWithValue(err.response.data.message)
@@ -161,9 +140,6 @@ const authSlice = createSlice({
         changeInput(state, action) {
             state[`${action.payload.activityName}`][`${action.payload.inputName}`] = action.payload.inputData
         },
-        setShouldFetch(state, action) {
-            state.shouldFetch = action.payload
-        },
         setCurrentUser(state, action) {
             state.currentUser = action.payload
         },
@@ -181,7 +157,6 @@ const authSlice = createSlice({
             state.status = "loading";
             state.error = null
         },
-
         [login.fulfilled]: (state, action) => {
             state.status = "resolved";
             state.currentUser = action.payload
@@ -236,7 +211,6 @@ export default authSlice.reducer;
 export const {
     setStatusAndError,
     changeInput,
-    setShouldFetch,
     setMessage,
     setCurrentUser,
     setCurrentUserFollowings,

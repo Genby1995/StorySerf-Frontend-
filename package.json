@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.2",
     "compressorjs": "^1.1.1",
+    "dotenv": "^16.0.3",
     "i": "^0.3.7",
     "npm": "^9.2.0",
     "react": "^18.2.0",
@@ -26,7 +27,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start_vps": "pm2 serve build 3000 --spa",
+    "start_vps": "npm run build && pm2 serve build 3000 --spa",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "serve": "serve build",

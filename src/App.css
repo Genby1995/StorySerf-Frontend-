@@ -19,13 +19,14 @@ body {
 }
 
 .content-wrapper {
+  position: relative;
   margin-inline: auto;
   max-width: 1160px;
   padding: 10px;
   background-color: var(--color-bkg);
 
   display: grid;
-  grid-template-columns: minmax(460px, auto) 320px;
+  grid-template-columns: minmax(300px, auto) 300px;
   gap: 10px;
 }
 
@@ -42,10 +43,19 @@ body {
 
 @media (max-width: 800px) {
 
+  .content-wrapper {
+    grid-template-columns: minmax(300px, auto);
+  }
+  
+}
+
+@media (max-width: 600px) {
+
   html,
   body {
     font-size: 14px;
   }
+  
 }
 
 @media (max-width: 480px) {

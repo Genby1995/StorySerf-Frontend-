@@ -98,7 +98,7 @@ const Post = (props) => {
     let options = {
         day: "2-digit",
         month: "2-digit",
-        year: "numeric",
+        year: "2-digit",
         hour: 'numeric',
         minute: 'numeric',
         second: 'numeric'
@@ -124,6 +124,8 @@ const Post = (props) => {
                 )
         }
     })
+    // SVG VARs
+    let svg_like = "M210.323,17.93h-17.898c-9.01,0-16.066-5.165-26.848-8.949 c-14.766-5.116-36.821-8.956-74.811-8.956C84.122,0.025,63.516,0,63.516,0c-6.309,0-11.377,2.882-15.035,6.363 c-1.392,1.323-2.844,3.245-3.465,6.994c-0.101,0.582-0.21,3.017-0.193,3.346c-0.478,10.729,6.008,14.614,9.682,15.835 c-0.101,0.034-0.033,0.126-0.235,0.117l-11.662-0.522c-10.352-0.472-20.572,6.986-20.572,19.669 c0,10.517,8.524,17.933,18.844,18.439l-6.184-0.287c-10.352-0.455-19.103,7.695-19.582,18.22 c-0.453,10.526,7.567,19.433,17.913,19.906c-10.345-0.472-19.121,7.677-19.573,18.203c-0.454,10.526,6.821,19.99,17.174,20.444 l68.73,8.63c0,0-14.324,23.959-14.324,59.455c0,23.664,16.905,26.848,26.848,26.848c7.821,0.002,9.927-15.151,9.927-15.151h0.016 c1.77-9.717,4.077-18.203,12.091-33.827c8.968-17.512,21.184-15.869,35.446-31.467c2.517-2.747,5.898-7.281,9.195-12.86 c0.269-0.295,0.521-0.708,0.764-1.289c0.293-0.69,0.646-1.172,0.956-1.812c0.545-1.003,1.082-2.005,1.61-3.059 c8.826-8.827,22.579-7.925,28.435-7.925c11.746,0,17.898-6.825,17.898-17.898l0.005-81.828 C228.227,22.121,223.143,17.93,210.323,17.93z"
 
     //Render
     return (
@@ -131,7 +133,7 @@ const Post = (props) => {
 
             {/* Likes display */}
             <div className={s.likesWrapper}>
-                <div className={s.postlikes}>
+                <div className={s.postlikesOutside}>
                     <div data-name="like" className={isLiked ? s.likesIncrementActivated : s.likesIncrement}>
                         <svg className={s.arrow} viewBox="0 0 9 14">
                             <path onClick={toggleLike} d="M6.660,8.922 L6.660,8.922 L2.350,13.408 L0.503,11.486 L4.813,7.000 L0.503,2.515 L2.350,0.592 L8.507,7.000 L6.660,8.922 Z" />
@@ -156,6 +158,20 @@ const Post = (props) => {
                     <div className={s.hidePost} onClick={togglePostVisability} >
                         {props.post.hidden ? "Раскрыть" : "Спрятать"}
                     </div>
+                    <div className={s.postlikesInside}>
+                        <div data-name="like" className={isLiked ? s.likesIncrementActivated : s.likesIncrement}>
+                            <svg className={s.arrow} viewBox="0 0 241.66 241.66">
+                                <path style={{ strokeWidth: "5px"}} onClick={toggleLike} d={svg_like} />
+                            </svg>
+                        </div>
+                        <div className={s.likesCount}>{isLoading ? <HourglassEmpty /> : props.post.likes.length - props.post.dislikes.length}</div>
+                        <div data-name="dislike" className={isDisliked ? s.likesDecrementActivated : s.likesDecrement}>
+                            <svg className={s.arrow} viewBox="0 0 241.66 241.66">
+                                <path style={{ strokeWidth: "5px"}} onClick={toggleLike} d={svg_like} />
+                            </svg>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div
@@ -180,8 +196,9 @@ const Post = (props) => {
                         : ''}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
 export default Post;
+

@@ -5,12 +5,12 @@ import authSlice from "./authSlice";
 import postMakerSlice from "./postMakerSlice";
 import profileSlice from "./profileSlice";
 import usersSlice from "./usersSlice";
-import darkmodeSlice from "./darkmodeSlice";
+import visualModeSlice from "./visualModeSlice";
 import searchStringSlice from "./searchStringSlice";
 
 let rootReducer = combineReducers({
     auth: authSlice,
-    darkmode: darkmodeSlice,
+    visualMode: visualModeSlice,
     messenger: messengerReducer,
     feed: feedSlice,
     profile: profileSlice,
