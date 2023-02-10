@@ -1,0 +1,202 @@
+.wrapper {
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+}
+
+.userSections {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 10px;
+  border-radius: 5px;
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-main);
+  box-shadow: 0 0 10px black;
+}
+
+.userSection {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: var(--color-text);
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-stroke);
+  transition: all 0.2s;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.userSection:hover {
+  opacity: 1;
+}
+
+.userSection:active {
+  box-shadow: 0 0 10px var(--color-char);
+}
+
+.current {
+  background-color: var(--color-char);
+}
+
+.users {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  justify-content: space-around;
+}
+
+.message {
+  padding: 1rem;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/*----------USER BLOCK------------*/
+
+.userBlock {
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px var(--color-stroke);
+  background-color: var(--color-main);
+  box-shadow: 0 0 10px black;
+
+  display: grid;
+  grid-template-areas:
+    'avatar actions '
+    'avatar nik '
+    'avatar name '
+    "info info";
+  grid-template-columns: 90px 1fr;
+  grid-template-rows: 30px 15px 1fr 40px;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+}
+
+.avatar {
+  grid-area: avatar;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  border: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.nikname {
+  grid-area: nik;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--color-text);
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  grid-area: name;
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions {
+  grid-area: actions;
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  grid-area: info;
+  background-color: var(--color-bkg);
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/*----------USER BLOCK------------*/
+
+/*----------ACTION BUTTON----------*/
+
+.actionButton {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: var(--color-char);
+  gap: 10px;
+  color: var(--color-char-text);
+  padding: 0.35rem;
+  opacity: 0.9;
+  transition: all 0.2s;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.notFollowed {
+  background-color: var(--color-stroke);
+  color:var(--color-text);
+}
+
+.followed {
+  background-color: var(--color-char);
+}
+
+.actionButton a {
+  color: var(--color-text);
+}
+
+.actionButton:hover {
+  opacity: 1;
+}
+
+.actionButton:active {
+  box-shadow: 0 0 1rem var(--color-char);
+}
+
+.actionButton:focus {
+  opacity: 1;
+}
+
+/*----------ACTION BUTTON----------*/

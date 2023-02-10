@@ -1,0 +1,233 @@
+/*MAIN*/
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bkg);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+
+    width: 640px;
+    height: 480px;
+    border-radius: 10px;
+    outline: solid 1px var(--color-stroke);
+    background-color: var(--color-main);
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+
+    color: var(--color-text);
+    box-shadow: 0 0 20px black;
+}
+
+h1 {
+    color: var(--color-text);
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+
+/*MAIN*/
+
+/*WELCOME HALF*/
+.welcome {
+    position: relative;
+    flex-grow: 1;
+    flex-basis: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    padding: 25px;
+
+    color: var(--color-char-text);
+    font-size: 1rem;
+}
+
+.welcomeHint {
+    display: none;
+    font-size: 1.0rem;
+    text-shadow: 1px 1px 1px black;
+    padding: 0.5rem;
+    background-color: var(--color-stroke);
+    border-radius: 5px;
+    cursor: pointer;
+
+    align-self: center;
+    justify-self: flex-end;
+    align-items: center;
+
+    transform-origin: center;
+    animation-name: scaling;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes scaling {
+    0% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.logoName {
+    font-size: 75px;
+    font-family: 'Amatic SC';
+}
+
+.charColor {
+    color: var(--color-char);
+}
+
+/*WELCOME HALF*/
+
+/*INPUT HALF*/
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    flex-grow: 1;
+}
+
+.form {
+    width: 100%;
+    padding: 25px;
+    color: var(--color-text);
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px
+}
+
+.formMessage {
+    display: flex;
+    height: 3rem;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.warning {
+    color: red;
+    /* color: var(--color-text-warn) */
+}
+
+.inputText {
+    background-color: var(--color-bkg);
+    color: var(--color-text);
+    border-radius: 5px;
+    padding: 0.75rem;
+    opacity: 0.90;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.inputText:hover {
+    opacity: 1;
+}
+
+.inputText::placeholder {
+    color: var(--color-stroke);
+}
+
+.inputText:focus {
+    opacity: 1;
+    outline: solid 1px var(--color-char);
+}
+
+/*INPUT HALF*/
+
+/*BUTTON*/
+.button {
+    margin-bottom: auto;
+    background-color: var(--color-char);
+    color: var(--color-char-text);
+    border-radius: 5px;
+    padding: 0.75rem;
+    opacity: 0.90;
+    transition: all 0.2s;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button a {
+    color: var(--color-char-text);
+}
+
+.button:hover {
+    opacity: 1;
+}
+
+.button:active {
+    box-shadow: 0 0 1rem var(--color-char);
+}
+
+.button:focus {
+    box-shadow: 0 0 1rem var(--color-char);
+}
+.welcomeh1{
+    margin-top: auto;
+}
+
+/*BUTTON*/
+
+/* REGISTER/LOGGIN TOGGLER */
+.hidden {
+    display: none;
+}
+
+/* REGISTER/LOGGIN TOGGLER */
+
+/*----АДАПТАЦИЯ-----*/
+
+@media (max-width: 640px) {
+    
+    .welcomeHint {
+        display: flex;
+    }
+
+    .background {
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        flex-direction: column-reverse;
+        border-radius: 0;
+    }
+
+    .welcome {
+        flex-basis: 100vh;
+        padding-bottom: 75px;
+    }
+
+    .formContainer {
+        flex-basis: 100vh;
+    }
+
+    .logoName {
+        font-size: 100px;
+    }
+}

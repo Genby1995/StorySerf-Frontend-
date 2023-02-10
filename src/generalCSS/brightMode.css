@@ -1,0 +1,13 @@
+.brightMode{
+  --color-text: rgb(35, 35, 35);
+  --color-text-dark: rgb(15, 15, 15);
+  --color-text-warn: red;
+  --color-stroke: rgba(35, 35, 35, 0.25);
+  --color-bkg: rgb(195, 195, 195);
+  --color-main: rgb(225,225,225); 
+  --color-main-light: rgb(235, 235, 235);
+  --color-main-dark: rgb(155, 155, 155);
+  --color-char: rgb(0, 100, 200);
+  --color-char-text: rgb(220, 220, 220);
+  --color-char-trans: rgba(0, 100, 200, .3);
+}

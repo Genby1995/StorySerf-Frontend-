@@ -1,0 +1,41 @@
+.messenger{
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 300px auto;
+    border-radius: 5px;
+    border: solid 1px var(--color-stroke);
+    background-color: var(--color-main);
+}
+
+.dialogs{
+    padding: 10px;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px var(--color-stroke);
+}
+
+.messages{
+    gap: 1rem;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.messagesWrapper{
+    display: grid;
+    grid-template-rows: auto 75px;
+    max-height: 100%;
+}
+
+.notready{
+    height: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    border: solid 1px var(--color-stroke);
+    background-color: var(--color-text-warn);
+}

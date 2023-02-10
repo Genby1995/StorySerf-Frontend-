@@ -1,0 +1,270 @@
+.post {
+    display: grid;
+    grid-template-areas: "likes body";
+    grid-template-columns: 60px auto;
+}
+
+.postBody {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: solid 1px var(--color-stroke);
+    background-color: var(--color-main);
+    box-shadow: 0 0 10px black;
+}
+
+.likesWrapper {
+    grid-area: likes;
+}
+
+.postlikesOutside {
+    position: sticky;
+    top: 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: start;
+}
+
+.postlikesInside {
+    display: none;
+    gap: 5px;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-self: center;
+}
+
+.likesCount {
+    height: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.likesDecrement .arrow,
+.likesDecrementActivated .arrow {
+    transform: rotate(90deg);
+}
+
+.likesDecrement .arrow path:hover {
+    fill: red;
+}
+
+.likesDecrement .arrow path:active {
+    stroke: red;
+}
+
+.likesIncrement .arrow,
+.likesIncrementActivated .arrow {
+    transform: rotate(270deg);
+}
+
+.likesIncrement .arrow path:hover {
+    fill: green;
+}
+
+.likesIncrement .arrow path:active {
+    stroke: green;
+}
+
+.likesDecrementActivated .arrow path {
+    fill: red;
+}
+
+
+.likesDecrementActivated .arrow path:active {
+    stroke: green;
+}
+
+.likesIncrementActivated .arrow path {
+    fill: green;
+}
+
+.likesIncrementActivated .arrow path:active {
+    stroke: red;
+}
+
+.creationInfo {
+    display: grid;
+    grid-template-areas: 
+    "Author Date Hide"
+    "Author Title Title";
+    align-items: center;
+    grid-template-columns: 50px auto 80px;
+    row-gap: 0.5rem;
+    column-gap: 10px;
+    padding: 10px;
+    flex-direction: row;
+    background-color: var(--color-bkg);
+    border-radius: 5px 5px 0 0;
+}
+
+.dateItem {
+    grid-area: Date;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    font-weight: 400;
+}
+
+.authorItem {
+    grid-area: Author;
+    font-size: .8rem;
+    color: var(--color-text);
+    font-weight: 500;
+
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    align-self: center;
+    justify-self: center;
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.titleItem {
+    grid-area: Title;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--color-text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.hidePost {
+    grid-area: Hide;
+    cursor: pointer;
+    padding: 0.25rem;
+    width: 80px;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-main-light);
+    color: var(--color-text);
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: 1px var(--color-stroke) solid;
+    transition: all 0.3s;
+}
+.hidePost:hover {
+    outline: 1px var(--color-char) solid;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 10px;
+    transition: all 0.5s ease-in-out;
+    gap: 5px;
+}
+
+.textItem {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: var(--color-text);
+    white-space: pre-line;
+    white-space: pre-wrap;
+}
+
+.imgItem {
+    width: 100%
+}
+
+.actions {
+    display: flex;
+    flex-flow: row;
+    gap: 15px;
+    padding: 10px;
+    background-color: var(--color-bkg);
+    border-radius: 0 0 5px 5px;
+}
+
+.actions__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 0.3rem;
+    opacity: 0.8;
+}
+
+.actions__item:hover {
+    opacity: 1;
+}
+
+.arrow {
+    width: 2rem;
+    height: 2rem;
+}
+
+.arrow path {
+    fill: var(--color-bkg);
+    stroke-width: .6;
+    stroke: var(--color-text);
+    transition: fill 0.3s ease-out;
+    cursor: pointer;
+}
+
+.hidden {
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 0;
+}
+
+.icon {
+    cursor: pointer;
+    position: relative;
+    font-size: 1.0rem;
+}
+
+
+  @media (max-width: 800px) {
+    .post {
+        grid-template-areas: "body body";
+        grid-template-columns: 100%;
+    }
+    .creationInfo {
+        grid-template-columns: 80px auto 80px;
+        grid-template-areas: 
+        "Author Date Hide"
+        "Author Title Title"
+        "Likes Title Title";
+    }
+    .postlikesOutside {
+        display: none;
+    }
+    .postlikesInside {
+        grid-area: Likes;
+        display: flex;
+    }
+
+    .arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .arrow path {
+        stroke-width: 2;
+    }
+
+    .likesIncrement .arrow,
+    .likesIncrementActivated .arrow {
+        transform: rotate(180deg);
+    }
+    
+    .likesDecrement .arrow,
+    .likesDecrementActivated .arrow {
+        transform: rotate(0deg);
+    }
+    
+  }
